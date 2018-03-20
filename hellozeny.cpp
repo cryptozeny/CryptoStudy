@@ -2,7 +2,7 @@
 
 int main(void) {
   
-  printf("hello world\n");
+  printf("bitcoin is a scam coin!\n");
   
   return 0;
 }
