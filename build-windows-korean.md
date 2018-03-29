@@ -51,11 +51,11 @@ Ubuntu Xenial 일지라도 Ubuntu Zesty로부터 크로스 컴파일러 패키�
 
 아래 과정은 그냥 Ubuntu (VM포함) 혹은 WSL에서 공통적으로 수행가능해. 물론 다른 리눅스 배포판에서도 사용가능하지만 툴체인을 설치하기위한 명령어는 조금 다를거야.
 
-먼저 일반적인 필수 의존성 패키지를 설치해보자: [주: aptitude는 설치과정중 의존성문제를 손보기 편해서 임의로 넣어봤어.]
+먼저 일반적인 필수 의존성 패키지를 설치해보자:
 
     sudo apt update
     sudo apt upgrade
-    sudo apt install build-essential libtool autotools-dev automake pkg-config bsdmainutils curl git aptitude
+    sudo apt install build-essential libtool autotools-dev automake pkg-config bsdmainutils curl git
 
 여기서 (`build-essential`) 이라는 패키지는 의존성 패키지를 위해 꼭 필요해 예를들면 (`protobuf`)는 호스트 유틸리티를 빌드해야되는데 빌드과정에서 필요하게 된다.
 
@@ -67,7 +67,7 @@ Ubuntu Xenial 일지라도 Ubuntu Zesty로부터 크로스 컴파일러 패키�
 
 정석대로 mingw32 크로스 컴파일러 툴체인을 설치하는 방법이라면:
 
-    sudo apt install g++-mingw-w64-x86-64
+    sudo apt install g++-mingw-w64-x86-64 #[주: Xenial(WSL)에서 테스트결과 이걸 설치하고 아래과정을 수행하면 의존성 충돌이 없어진다.]
 
 Ubuntu Trusty 14.04에서는:
 
@@ -79,7 +79,6 @@ Ubuntu Xenial 16.04와 Windows Subsystem for Linux(WSL) <sup>[1](#footnote1),[2]
     sudo add-apt-repository "deb http://old-releases.ubuntu.com/ubuntu zesty universe" #[주: archive.ubuntu.com에는 zesty패키지가 내려간상태라 임의로 변경.]
     sudo apt update
     sudo apt upgrade
-    sudo aptitude install g++-mingw-w64-x86-64 [주: binutils버전이 안맞으니 설치를 안하거나 다운그레이드 할꺼냐고 묻느데 n한뒤 y해서 다운그레이드후 설치하면된다.]
     sudo update-alternatives --config x86_64-w64-mingw32-g++ # mingw32 g++ compiler의 기본옵션을 posix로 설정하자.
 
 Ubuntu Zesty 17.04 <sup>[2](#footnote2)</sup>:
