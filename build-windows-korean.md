@@ -88,7 +88,7 @@ Ubuntu Zesty 17.04 <sup>[2](#footnote2)</sup>:
 
 툴체인들이 제대로 설치되었다면 정상적인 빌드과정을 따라가자:
 
-WSL안에 Bitcoin Core 소스의 경로는 무.조.건 기본으로 마운트된 파일시스템 안에 위치해 있어야해, 예를들면 /usr/src/bitcoin
+WSL안에 Bitcoin Core 소스의 경로는 **반드시** 기본으로 마운트된 파일시스템 안에 위치해 있어야해, 예를들면 /usr/src/bitcoin
 그리고 /mnt/d/ 안의 경로에 위치해선 안돼. 위 사항을 지키지 않을경우 autoconf 스크립트가 에러를 뿜을거야.
 다시말하자면 윈도우 파일시스템 내부의 경로를 빌드를 위해 직접 사용하는것은 불가능하단 이야기였어.
 
@@ -116,7 +116,7 @@ Ubuntu Xenial 16.04와 Ubuntu Zesty 17.04, Windows Subsystem for Linux의 경우
 
     sudo update-alternatives --config i686-w64-mingw32-g++  # Set the default mingw32 g++ compiler option to posix.
 
-WSL안에 Bitcoin Core 소스의 경로는 /usr/src/bitcoin과 같이 무.조.건 기본으로 마운트된 파일시스템 안에 위치해 있어야해.
+WSL안에 Bitcoin Core 소스의 경로는 /usr/src/bitcoin과 같이 **반드시** 기본으로 마운트된 파일시스템 안에 위치해 있어야해.
 절대로 /mnt/d/ 안의 경로에 위치해선 안돼. 위 사항을 지키지 않을경우 autoconf 스크립트가 에러를 뿜을거야.
 다시말하자면 윈도우 파일시스템 내부의 경로를 빌드를 위해 직접 사용하는것은 불가능하단 이야기였어.
 
