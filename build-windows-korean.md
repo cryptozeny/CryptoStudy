@@ -19,7 +19,7 @@ Windows용 Bitcoin Core를 빌드할때 제대로 동작한다 알려진 옵션�
 Windows Subsystem for Linux 설치
 ---------------------------------------
 
-Microsoft가 Windows 10 에서[Windows Subsystem for Linux (WSL)](https://msdn.microsoft.com/commandline/wsl/about)라는걸 출시했어. 
+Microsoft가 Windows 10 에서 [Windows Subsystem for Linux (WSL)](https://msdn.microsoft.com/commandline/wsl/about)라는걸 출시했어. 
 이것은 Ubuntu 환경을 베이스로 bash셸을 실행가능하기에 여기서 크로스 컴파일러를 이용하면 다른 리눅스 환경을 따로 구성할 필요는 없을거야.
 물론 OpenSUSE와 같은 몇가지 다른 리눅스 시스템을 설치할수도 있지만 Ubuntu에서만 테스트되었으니 그걸 기술할거야.
 
@@ -51,7 +51,7 @@ Ubuntu Xenial 일지라도 Ubuntu Zesty로부터 크로스 컴파일러 패키�
 
 아래 과정은 그냥 Ubuntu (VM포함) 혹은 WSL에서 공통적으로 수행가능해. 물론 다른 리눅스 배포판에서도 사용가능하지만 툴체인을 설치하기위한 명령어는 조금 다를거야.
 
-먼저 일반적인 필수 의존성 패키지를 설치해보자: [주: aptitude는 패키지 설치과정중 의존성 문제해결하기 편해서 임의로 넣어봤어.]
+먼저 일반적인 필수 의존성 패키지를 설치해보자: [주: aptitude는 설치과정중 의존성문제를 손보기 편해서 임의로 넣어봤어.]
 
     sudo apt update
     sudo apt upgrade
@@ -79,7 +79,8 @@ Ubuntu Xenial 16.04와 Windows Subsystem for Linux(WSL) <sup>[1](#footnote1),[2]
     sudo add-apt-repository "deb http://old-releases.ubuntu.com/ubuntu zesty universe" #[주: archive.ubuntu.com에는 zesty패키지가 내려간상태라 임의로 변경.]
     sudo apt update
     sudo apt upgrade
-    sudo update-alternatives --config x86_64-w64-mingw32-g++ # Set the default mingw32 g++ compiler option to posix.
+    sudo aptitude install g++-mingw-w64-x86-64 [주: binutils버전이 안맞으니 설치를 안하거나 다운그레이드 할꺼냐고 묻느데 n한뒤 y해서 다운그레이드후 설치하면된다.]
+    sudo update-alternatives --config x86_64-w64-mingw32-g++ # mingw32 g++ compiler의 기본옵션을 posix로 설정하자.
 
 Ubuntu Zesty 17.04 <sup>[2](#footnote2)</sup>:
 
