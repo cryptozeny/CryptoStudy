@@ -14,7 +14,7 @@ Windows용 Bitcoin Core를 빌드할때 제대로 동작한다 알려진 옵션�
 아래의 다른 옵션들도 아마 동작하겠지만 실험된 샘플이 없는관계로 해본사람은 기여를 부탁한다:
 
 * Windows용 POSIX 호환성계층 앱 [cygwin](http://www.cygwin.com/)이나 [msys2](http://www.msys2.org/)을 이용.
-* Windows용 네이트브 컴파일러 툴체인 [Visual Studio](https://www.visualstudio.com) 같은거.
+* Windows용 네이티브 컴파일러 툴체인 [Visual Studio](https://www.visualstudio.com) 같은거.
 
 Windows Subsystem for Linux 설치
 ---------------------------------------
@@ -36,7 +36,7 @@ WSL 설치과정에 대한 자세한 설명은 위의 링크에도 설명되있�
   * cmd에서 lxrun /install을 입력하고 y로 넘겨줘
   * 자동으로 스토어에서 Ubuntu 이미지를 받아 설치할거야 [주: 지울때는 lxrun /uninstall /full로 지우면 된다.]
 3. 설치완료하기
-  * 로컬설정을 en-us로 놔둘꺼냐 물어보는데 오래걸리니 n으로 넘겨버리자.
+  * 로캘설정을 en-us로 놔둘꺼냐 물어보는데 바꾸면 오래걸리니 n으로 넘겨버리자.
   * 새로운 UNIX 사용자 계정을 생성하자. (이건 윈도우 계정과는 별개로 돌아간다.)
 
 cmd 창에서 bash를 입력해서 셸을 활성화 하였다면, 아래의 "크로스 컴파일" 섹션의 내용을 따라가면 될거야.
@@ -67,7 +67,7 @@ Ubuntu Xenial 일지라도 Ubuntu Zesty로부터 크로스 컴파일러 패키�
 
 정석대로 mingw32 크로스 컴파일러 툴체인을 설치하는 방법이라면:
 
-    sudo apt install g++-mingw-w64-x86-64 #[주: Xenial(WSL)에서 테스트결과 이걸 설치하고 아래과정을 수행하면 의존성 충돌이 없어진다.]
+    sudo apt install g++-mingw-w64-x86-64 #[주: Xenial(WSL)에서 테스트결과 이걸먼저설치하고 아래과정을 수행하면 의존성 충돌이 안생긴다.]
 
 Ubuntu Trusty 14.04에서는:
 
@@ -76,7 +76,7 @@ Ubuntu Trusty 14.04에서는:
 Ubuntu Xenial 16.04와 Windows Subsystem for Linux(WSL) <sup>[1](#footnote1),[2](#footnote2)</sup>에서는:
 
     sudo apt install software-properties-common
-    sudo add-apt-repository "deb http://old-releases.ubuntu.com/ubuntu zesty universe" #[주: archive.ubuntu.com에는 zesty패키지가 내려간상태라 임의로 변경.]
+    sudo add-apt-repository "deb http://old-releases.ubuntu.com/ubuntu zesty universe" #[주: archive.ubuntu.com의 zesty패키지가 내려간상태라 변경함.]
     sudo apt update
     sudo apt upgrade
     sudo update-alternatives --config x86_64-w64-mingw32-g++ # mingw32 g++ compiler의 기본옵션을 posix로 설정하자.
@@ -87,8 +87,8 @@ Ubuntu Zesty 17.04 <sup>[2](#footnote2)</sup>:
 
 툴체인들이 제대로 설치되었다면 정상적인 빌드과정을 따라가자:
 
-WSL안에 Bitcoin Core 소스의 경로는 **반드시** 기본으로 마운트된 파일시스템 안에 위치해 있어야해, 예를들면 /usr/src/bitcoin
-그리고 /mnt/d/ 안의 경로에 위치해선 안돼. 위 사항을 지키지 않을경우 autoconf 스크립트가 에러를 뿜을거야.
+WSL안에 Bitcoin Core 소스의 경로는 /usr/src/bitcoin과 같이 **반드시** 기본으로 마운트된 파일시스템 안에 위치해 있어야해.
+절대로 /mnt/d/ 안의 경로에 위치해선 안돼. 위 사항을 지키지 않을경우 autoconf 스크립트가 에러를 뿜을거야.
 다시말하자면 윈도우 파일시스템 내부의 경로를 빌드를 위해 직접 사용하는것은 불가능하단 이야기였어.
 
 평범하게 소스를 가져와보자:
@@ -101,10 +101,10 @@ WSL안에 Bitcoin Core 소스의 경로는 **반드시** 기본으로 마운트�
     cd depends
     make HOST=x86_64-w64-mingw32
     cd ..
-    ./autogen.sh # tarball가져온걸 빌드할땐 필요없는 과정이야.
+    ./autogen.sh # tarball로 받아온걸 빌드할땐 필요없는 과정이야.
     CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/
     make
-    [주: make -j 스레드수 옵션을 붙여야 멀티스레드로 컴파일이 가능하다.]
+    [주: make -j 스레드수 옵션을 넣어야 멀티스레드로 빌드가 가능하다.]
 
 ## 32비트 윈도우용으로 빌드하기
 
@@ -130,10 +130,10 @@ WSL안에 Bitcoin Core 소스의 경로는 /usr/src/bitcoin과 같이 **반드�
     cd depends
     make HOST=i686-w64-mingw32
     cd ..
-    ./autogen.sh # tarball가져온걸 빌드할땐 필요없는 과정이야.
+    ./autogen.sh # tarball로 받아온걸 빌드할땐 필요없는 과정이야.
     CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/
     make
-    [주: make -j 스레드수 옵션을 붙여야 멀티스레드로 컴파일이 가능하다.]
+    [주: make -j 스레드수 옵션을 넣어야 멀티스레드로 빌드가 가능하다.]
 
 ## 다른시스템의 경우
 
