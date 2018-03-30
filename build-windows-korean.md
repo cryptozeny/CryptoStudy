@@ -104,6 +104,7 @@ WSL안에 Bitcoin Core 소스의 경로는 **반드시** 기본으로 마운트�
     ./autogen.sh # tarball가져온걸 빌드할땐 필요없는 과정이야.
     CONFIG_SITE=$PWD/depends/x86_64-w64-mingw32/share/config.site ./configure --prefix=/
     make
+    [주: make -j 스레드수 옵션을 붙여야 멀티스레드로 컴파일이 가능하다.]
 
 ## 32비트 윈도우용으로 빌드하기
 
@@ -113,7 +114,7 @@ WSL안에 Bitcoin Core 소스의 경로는 **반드시** 기본으로 마운트�
 
 Ubuntu Xenial 16.04와 Ubuntu Zesty 17.04, Windows Subsystem for Linux의 경우 <sup>[2](#footnote2)</sup>:
 
-    sudo update-alternatives --config i686-w64-mingw32-g++  # Set the default mingw32 g++ compiler option to posix.
+    sudo update-alternatives --config i686-w64-mingw32-g++  # mingw32 g++ compiler의 기본옵션을 posix로 설정하자.
 
 WSL안에 Bitcoin Core 소스의 경로는 /usr/src/bitcoin과 같이 **반드시** 기본으로 마운트된 파일시스템 안에 위치해 있어야해.
 절대로 /mnt/d/ 안의 경로에 위치해선 안돼. 위 사항을 지키지 않을경우 autoconf 스크립트가 에러를 뿜을거야.
@@ -132,6 +133,7 @@ WSL안에 Bitcoin Core 소스의 경로는 /usr/src/bitcoin과 같이 **반드�
     ./autogen.sh # tarball가져온걸 빌드할땐 필요없는 과정이야.
     CONFIG_SITE=$PWD/depends/i686-w64-mingw32/share/config.site ./configure --prefix=/
     make
+    [주: make -j 스레드수 옵션을 붙여야 멀티스레드로 컴파일이 가능하다.]
 
 ## 다른시스템의 경우
 
